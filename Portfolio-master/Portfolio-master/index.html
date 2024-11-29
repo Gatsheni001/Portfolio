@@ -302,6 +302,18 @@
             <div id="date"></div>
         </div>
     </section>
+
+    <section>
+
+        <div class="chatbot">
+            <div class="chatbot-header">Thato's Portfolio Chatbot</div>
+            <div class="chatbot-messages" id="messages"></div>
+            <div class="chatbot-input">
+                <input type="text" id="userInput" placeholder="Type your message...">
+                <button onclick="handleUserInput()">Send</button>
+            </div>
+        </div>
+    </section>
  
     <br>
     <!-- Footer -->
@@ -371,6 +383,33 @@ navbarLinks.forEach(link => {
       }
 
       setInterval(updateClock, 1000);
+
+
+        <!-- Chatbot Script -->
+
+        const messages = document.getElementById('messages');
+        const responses = {
+            "hi": "Hi there! How can I help you today? You can ask about my skills, projects, or contact info.",
+            "skills": "I am skilled in Java, Spring Boot, RPG programming, and React Native. Want to know more?",
+            "projects": "Here are some of my recent projects:\n1. Symptom Tracker\n2. Bird Hotspot App\n3. Car Parts App. Which one interests you?",
+            "contact": "You can reach me at: \nEmail: thatondlovu125@gmail.com \nGitHub: https://github.com/ThatoNdlovu125",
+            "default": "Sorry, I didn't get that. Please try asking about my skills, projects, or contact info."
+        };
+
+        function handleUserInput() {
+            const userInput = document.getElementById('userInput').value.toLowerCase();
+            addMessage(`You: ${userInput}`);
+            const botResponse = responses[userInput] || responses["default"];
+            setTimeout(() => addMessage(`Bot: ${botResponse}`), 500);
+            document.getElementById('userInput').value = '';
+        }
+
+        function addMessage(text) {
+            const message = document.createElement('div');
+            message.textContent = text;
+            messages.appendChild(message);
+            messages.scrollTop = messages.scrollHeight;
+        }
 
     </script>
 </body>
